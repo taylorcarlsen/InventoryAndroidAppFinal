@@ -84,8 +84,26 @@ class MainActivity : AppCompatActivity() {
 
         fabAddItem.setOnClickListener { view ->
 
+            var itemService: ItemService = ServiceBuilder.builderService(ItemService::class.java)
+            var itemRequest: Call<List<Item>> = itemService.getItems()
+
+            itemRequest.enqueue(object : Callback<List<Item>> {
+                @SuppressLint("SetTextI18n")
+                override fun onFailure(call: Call<List<Item>>, t: Throwable) {
+                    //tvError.text = "Could not retrieve categories."
+                }
+
+                override fun onResponse(call: Call<List<Item>>, response: Response<List<Item>>) {
+                    response.body()?.forEach {
+                        stringResponse = it.id.toString()
+                        idArray.add(stringResponse)
+                    }
+                    //idArray.add("666666")
+                }
+            })
+
             var stringBarcode = tvBarcode.text.toString()
-            if(idArray.contains(stringBarcode)){
+            /*if(idArray.contains(stringBarcode)){
                 val activityIntent = Intent(this, AddInventoryActivity::class.java)
                 activityIntent.putExtra("ITEM_NUMBER", tvBarcode.text.toString())
                 activityIntent.putExtra("EMPLOYEE_ID",userId)
@@ -94,6 +112,19 @@ class MainActivity : AppCompatActivity() {
                 val activityIntent = Intent(this, AddItemActivity::class.java)
                 activityIntent.putExtra("EMPLOYEE_ID",userId)
                 activityIntent.putExtra("ITEM_NUMBER", tvBarcode.text.toString())
+                startActivity(activityIntent)
+            }*/
+            if(idArray.contains(stringBarcode)){
+
+                val activityIntent = Intent(this, AddItemActivity::class.java)
+                activityIntent.putExtra("ITEM_NUMBER", tvBarcode.text.toString())
+                activityIntent.putExtra("EMPLOYEE_ID",userId)
+                startActivity(activityIntent)
+
+            }else {
+                val activityIntent = Intent(this, AddInventoryActivity::class.java)
+                activityIntent.putExtra("ITEM_NUMBER", tvBarcode.text.toString())
+                activityIntent.putExtra("EMPLOYEE_ID",userId)
                 startActivity(activityIntent)
             }
         }

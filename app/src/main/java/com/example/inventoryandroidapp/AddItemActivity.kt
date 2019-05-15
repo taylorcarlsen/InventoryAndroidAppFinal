@@ -40,6 +40,10 @@ class AddItemActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         val mContext: Context = this
 
+        itemNumber = intent.getStringExtra("ITEM_NUMBER")
+        tvInventoryItemCode.setText(itemNumber)
+        userId = intent.getStringExtra("EMPLOYEE_ID")
+
         intUserId = userId.toInt()
 
         val categorySpinner : Spinner = findViewById(R.id.spinnerCategory)
@@ -57,7 +61,7 @@ class AddItemActivity : AppCompatActivity() {
         }
 
         var responseString = ""
-        var categoryService: CategoryService = ServiceBuilder.builderService(CategoryService::class.java)
+        /*var categoryService: CategoryService = ServiceBuilder.builderService(CategoryService::class.java)
         var categoryRequest: Call<List<Category>> = categoryService.getCategories()
 
         categoryRequest.enqueue(object : Callback<List<Category>>{
@@ -77,7 +81,7 @@ class AddItemActivity : AppCompatActivity() {
                     categoryDescriptions.add(responseString)
                 }
             }
-        })
+        })*/
 
         fabAddItem.setOnClickListener { view ->
 
@@ -125,8 +129,5 @@ class AddItemActivity : AppCompatActivity() {
             })
         }
 
-        userId = intent.getStringExtra("EMPLOYEE_ID")
-        itemNumber = intent.getStringExtra("ITEM_NUMBER")
-        tvInventoryItemCode.setText(itemNumber)
     }
 }
