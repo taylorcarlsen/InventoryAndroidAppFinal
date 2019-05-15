@@ -76,20 +76,24 @@ class MainActivity : AppCompatActivity() {
                 response.body()?.forEach {
                     stringResponse = it.id.toString()
                     idArray.add(stringResponse)
+                    idArray.add("666666")
                 }
+                //idArray.add("666666")
             }
         })
 
         fabAddItem.setOnClickListener { view ->
 
-            if(idArray.contains(tvBarcode.text)){
+            var stringBarcode = tvBarcode.text.toString()
+            if(idArray.contains(stringBarcode)){
                 val activityIntent = Intent(this, AddInventoryActivity::class.java)
-                activityIntent.putExtra("ITEM_NUMBER", tvBarcode.text)
+                activityIntent.putExtra("ITEM_NUMBER", tvBarcode.text.toString())
                 activityIntent.putExtra("EMPLOYEE_ID",userId)
                     startActivity(activityIntent)
             }else {
                 val activityIntent = Intent(this, AddItemActivity::class.java)
-                activityIntent.putExtra("ITEM_NUMBER", tvBarcode.text)
+                activityIntent.putExtra("EMPLOYEE_ID",userId)
+                activityIntent.putExtra("ITEM_NUMBER", tvBarcode.text.toString())
                 startActivity(activityIntent)
             }
         }

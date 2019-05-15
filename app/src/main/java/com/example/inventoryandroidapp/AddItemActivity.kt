@@ -30,6 +30,7 @@ class AddItemActivity : AppCompatActivity() {
     private var name = ""
     private var baseQty = ""
     private var userId = ""
+    private var intUserId = 0
     private lateinit var categoryArrayList: ArrayList<Category>
     private lateinit var categoryDescriptions: ArrayList<String>
 
@@ -38,6 +39,8 @@ class AddItemActivity : AppCompatActivity() {
         setContentView(R.layout.activity_add_item)
         setSupportActionBar(toolbar)
         val mContext: Context = this
+
+        intUserId = userId.toInt()
 
         val categorySpinner : Spinner = findViewById(R.id.spinnerCategory)
 
@@ -122,8 +125,8 @@ class AddItemActivity : AppCompatActivity() {
             })
         }
 
+        userId = intent.getStringExtra("EMPLOYEE_ID")
         itemNumber = intent.getStringExtra("ITEM_NUMBER")
         tvInventoryItemCode.setText(itemNumber)
-        userId = intent.getStringExtra("EMPLOYEE_ID")
     }
 }
