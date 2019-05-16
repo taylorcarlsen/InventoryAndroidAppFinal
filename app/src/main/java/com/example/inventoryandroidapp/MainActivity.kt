@@ -114,7 +114,7 @@ class MainActivity : AppCompatActivity() {
                 activityIntent.putExtra("ITEM_NUMBER", tvBarcode.text.toString())
                 startActivity(activityIntent)
             }*/
-            if(!idArray.contains(stringBarcode)){
+            if(idArray.contains(stringBarcode)){
 
                 val activityIntent = Intent(this, AddInventoryActivity::class.java)
                 activityIntent.putExtra("ITEM_NUMBER", tvBarcode.text.toString())

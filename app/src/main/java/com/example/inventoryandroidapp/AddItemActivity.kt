@@ -24,6 +24,7 @@ import retrofit2.Response
 class AddItemActivity : AppCompatActivity() {
 
     private var itemNumber = ""
+    private var intItemNumber = 0
     private var baseQuantity = 0
     private var description = ""
     private var category = ""
@@ -42,6 +43,8 @@ class AddItemActivity : AppCompatActivity() {
 
         itemNumber = intent.getStringExtra("ITEM_NUMBER")
         tvInventoryItemCode.setText(itemNumber)
+        itemNumber = tvInventoryItemCode.text.toString()
+        intItemNumber = itemNumber.toInt()
         userId = intent.getStringExtra("EMPLOYEE_ID")
 
         intUserId = userId.toInt()
@@ -100,11 +103,12 @@ class AddItemActivity : AppCompatActivity() {
             name = etName.text.toString()
 
             var newItem = Item()
-            newItem.setId(itemNumber.toInt())
-            newItem.setBaseQty(baseQuantity)
-            newItem.setDescription(description)
-            newItem.setCategoryId(category)
-            newItem.setName(name)
+            var item = Item()
+            item.setId(intItemNumber)
+            item.setBaseQty(baseQuantity)
+            item.setDescription(description)
+            item.setCategoryId(category)
+            item.setName(name)
 
             fun sendIntent(){
                 val activityIntent = Intent(this, AddInventoryActivity::class.java)
