@@ -14,7 +14,7 @@ public interface ItemService {
     Call<List<Item>> getItems();
 
     @GET("item/{id}")
-    Call<Item> getItem(@Path("id")int id);
+    Call<Item> getItem(@Path("id")String id);
 
     @POST("item")
     Call<Item> createItem(@Body Item newItem);

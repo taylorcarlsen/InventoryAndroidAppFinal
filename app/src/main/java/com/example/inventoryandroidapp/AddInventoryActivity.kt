@@ -43,7 +43,7 @@ class AddInventoryActivity : AppCompatActivity() {
             newInventory.date = LocalDateTime.now()*/
             //newInventory.setId(UUID.randomUUID())
             newInventory.setQty(intQuantity)
-            newInventory.setItemId(itemNumber.toInt())
+            newInventory.setItemId(itemNumber)
             newInventory.setUserId(intUserId)
             //newInventory.setDate(LocalDateTime.now())
 

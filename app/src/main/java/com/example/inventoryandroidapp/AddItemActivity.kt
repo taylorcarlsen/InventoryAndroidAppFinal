@@ -24,7 +24,6 @@ import retrofit2.Response
 class AddItemActivity : AppCompatActivity() {
 
     private var itemNumber = ""
-    private var intItemNumber = 0
     private var baseQuantity = 0
     private var description = ""
     private var category = ""
@@ -44,7 +43,6 @@ class AddItemActivity : AppCompatActivity() {
         itemNumber = intent.getStringExtra("ITEM_NUMBER")
         tvInventoryItemCode.setText(itemNumber)
         itemNumber = tvInventoryItemCode.text.toString()
-        intItemNumber = itemNumber.toInt()
         userId = intent.getStringExtra("EMPLOYEE_ID")
 
         intUserId = userId.toInt()
@@ -63,29 +61,6 @@ class AddItemActivity : AppCompatActivity() {
             categorySpinner.adapter = adapter
         }
 
-        var responseString = ""
-        /*var categoryService: CategoryService = ServiceBuilder.builderService(CategoryService::class.java)
-        var categoryRequest: Call<List<Category>> = categoryService.getCategories()
-
-        categoryRequest.enqueue(object : Callback<List<Category>>{
-            @SuppressLint("SetTextI18n")
-            override fun onFailure(call: Call<List<Category>>, t: Throwable) {
-                tvError.text = "Could not retrieve categories."
-            }
-
-            override fun onResponse(call: Call<List<Category>>, response: Response<List<Category>>) {
-
-                //Use this later
-                /*var adapter: ArrayAdapter<Category> = ArrayAdapter(mContext,
-                    android.R.layout.simple_spinner_dropdown_item,response.body())
-                categorySpinner.setAdapter(adapter)*/
-                response.body()?.forEach{
-                    responseString = it.description.toString()
-                    categoryDescriptions.add(responseString)
-                }
-            }
-        })*/
-
         fabAddItem.setOnClickListener { view ->
 
             var selectedItem: String = categorySpinner.getSelectedItem().toString()
@@ -102,9 +77,9 @@ class AddItemActivity : AppCompatActivity() {
             description = etDescription.text.toString()
             name = etName.text.toString()
 
-            var newItem = Item()
+            //var newItem = Item()
             var item = Item()
-            item.setId(intItemNumber)
+            item.setId(itemNumber)
             item.setBaseQty(baseQuantity)
             item.setDescription(description)
             item.setCategoryId(category)
@@ -119,7 +94,7 @@ class AddItemActivity : AppCompatActivity() {
 
             var itemService: ItemService = ServiceBuilder.builderService(ItemService::class.java)
             var createRequest: Call<Item>
-            createRequest = itemService.createItem(newItem)
+            createRequest = itemService.createItem(item)
 
             createRequest.enqueue(object: Callback<Item>{
                 override fun onFailure(call: Call<Item>, t: Throwable) {

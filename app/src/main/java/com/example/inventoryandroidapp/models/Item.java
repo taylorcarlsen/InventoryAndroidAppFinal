@@ -1,7 +1,9 @@
 package com.example.inventoryandroidapp.models;
 
+import java.math.BigInteger;
+
 public class Item {
-    private int Id;
+    private String Id;
     private String Name;
     private String Description;
     private int BaseQty;
@@ -13,7 +15,7 @@ public class Item {
     }
     // Getters
 
-    public int getId() {
+    public String getId() {
         return Id;
     }
 
@@ -39,7 +41,7 @@ public class Item {
 
     // Setters
 
-    public void setId(int id) {
+    public void setId(String id) {
         Id = id;
     }
 

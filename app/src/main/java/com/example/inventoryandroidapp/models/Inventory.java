@@ -1,5 +1,6 @@
 package com.example.inventoryandroidapp.models;
 
+import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.UUID;
@@ -7,7 +8,7 @@ import java.util.UUID;
 public class Inventory {
     private UUID Id;
     private int Qty;
-    private int ItemId;
+    private String ItemId;
     private int UserId;
     private LocalDateTime Date;
 
@@ -27,7 +28,7 @@ public class Inventory {
         return UserId;
     }
 
-    public int getItemId() {
+    public String getItemId() {
         return ItemId;
     }
 
@@ -44,7 +45,7 @@ public class Inventory {
         Qty = qty;
     }
 
-    public void setItemId(int itemId) {
+    public void setItemId(String itemId) {
         ItemId = itemId;
     }
 
